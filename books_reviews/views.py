@@ -20,9 +20,10 @@ class AddReview(generic.CreateView):
     model = Review
     form_class = ReviewForm
     template_name = 'review-form.html'
+
     # fields = '__all__'
 
-    def form_valid(self, form):         # set reviews.user as current user
+    def form_valid(self, form):  # set reviews.user as current user
         form.instance.user = self.request.user
         return super().form_valid(form)
 
@@ -45,10 +46,28 @@ class DeleteReview(generic.DeleteView):
     success_url = reverse_lazy('home')
 
 
-class UserReviewsList(generic.ListView):
+class UserReviews(generic.ListView):
     model = Review
     template_name = 'user-reviews.html'
 
     def get_queryset(self):
-        return Review.objects.filter(     # all user reviews, sorted by the latest
+        return Review.objects.filter(  # all user reviews, sorted by the latest
             user=self.request.user).order_by('-id')
+
+
+class SearchReview(generic.ListView):
+    model = Review
+    template_name = 'search-review.html'
+    context_object_name = 'all_search_results'
+
+    def get_queryset(self):
+
+        query = self.request.GET.get('search')
+
+        if query:
+            result = Review.objects.filter(book_title__contains=query)
+
+        else:
+            result = None
+
+        return result
