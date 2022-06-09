@@ -1,6 +1,6 @@
 from django import forms
 from .models import Review
-from django.contrib.auth.forms import AuthenticationForm, UsernameField
+
 
 
 #  review form
@@ -24,14 +24,3 @@ class ReviewForm(forms.ModelForm):
         }
 
 
-#  custom login form
-class UserLoginForm(AuthenticationForm):
-    def __init__(self, *args, **kwargs):
-        super(UserLoginForm, self).__init__(*args, **kwargs)
-
-    username = UsernameField(widget=forms.TextInput(
-        attrs={'class': 'form-control form-control-lg', 'placeholder': 'Enter username'}))
-    password = forms.CharField(widget=forms.PasswordInput(
-        attrs={
-            'class': 'form-control form-control-lg',
-            'placeholder': 'Enter password'}))

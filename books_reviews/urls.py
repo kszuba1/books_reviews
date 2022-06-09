@@ -9,5 +9,7 @@ urlpatterns = [
     path('deleteReview/<int:pk>', views.DeleteReviewView.as_view(), name='delete-review'),  # delete review
     path('myReviews/', views.UserReviewListView.as_view(), name='user-reviews'),  # user's reviews
     path('searchReview/', views.SearchReviewView.as_view(), name='search-review'),  # search review by book's title
+    path('userReviews/<int:pk>', views.UserIdReviewsView.as_view(), name='user-id-reviews'),     # reviews by user id
+    # path('bookTitle/<str:book_title>', views.BookTitleView.as_view(), name='book-title')  # reviews by book title
 
 ]

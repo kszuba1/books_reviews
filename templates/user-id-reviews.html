@@ -1,9 +1,5 @@
 {% extends 'base.html' %}
 
-{% block title %}
-    Search Book
-{% endblock %}
-
 {% block content %}
 
     <style>
@@ -13,7 +9,7 @@
             display: block;
             position: absolute;
             left: 0;
-            width: 55%;
+            width: 100%;
             height: 1.5em;
         }
     </style>
@@ -22,21 +18,22 @@
             <h1 style="font-size: 70px; font-family: 'Roboto Slab', serif;">BooksReviews</h1>
         </div>
     </div>
-    <div class="container" style="padding-top: 15px;padding-bottom: 30px; width: 95%">
+    <div class="container" style="padding-top: 15px;padding-bottom: 30px; width: 85%">
         <div class="topnav" style="margin-bottom: 5px">
-            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'home' %}" >Home</a>
             {% if user.is_authenticated %}
                 <a href="{% url 'user-reviews' %}">Your reviews</a>
+                <a href="#" class="disabled nav-link active">{{ all_reviews_by_user.0.user.username }} Reviews</a>
                 <a href="{% url 'add-review' %}">Add review</a>
                 <a href="{% url 'logout' %}">Logout</a>
-                <p class="nav text-primary" style="padding: 14px 16px; font-size: 17px; display: inline-block">
-                    Hello, {{ user.get_username }}!</p>
+                <span class="nav text-primary" style="padding: 14px 16px; font-size: 17px; display: inline-block">
+                    Hello, {{ user.get_username }}!</span>
             {% else %}
+                <a href="#" class="disabled nav-link active">{{ all_reviews_by_user.0.user.username }} Reviews</a>
                 <a href="{% url 'login' %}">Login</a>
             {% endif %}
             <div class="search-container">
-                <form action="{% url 'search-review' %}">
-                    {% csrf_token %}
+                  <form action="{% url 'search-review' %}">
                     <input type="text" placeholder="Search by book title..." name="search">
                     <button type="submit"><i class="fa fa-search"></i></button>
                 </form>
@@ -58,16 +55,13 @@
             <tbody>
             {% for review in object_list %}
                 <tr class="rounded">
-
                     <td><a href="{% url 'review-detail' review.pk %}" class="rowLink"
                            style="text-decoration: none">{{ review.title }}</a></td>
                     <td class="text-success" style=" font-weight: bold;">{{ review.book_title }}</td>
                     <td>{{ review.book_author }}</td>
                     <td>{{ review.rate }}</td>
-                    <td class="text-primary"><a href="{% url 'user-id-reviews' review.user.pk %}"
-                                                style="text-decoration: none">{{ review.user }}</a></td>
+                    <td class="text-primary">{{ review.user }}</td>
                     <td>{{ review.review_date }}</td>
-
                 </tr>
             {% endfor %}
             </tbody>
