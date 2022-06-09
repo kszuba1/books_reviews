@@ -15,9 +15,9 @@ class Review(models.Model):
     review_date = models.DateField(auto_now_add=True)
 
     def __str__(self):
-
         return self.title + ' ' + str(self.user)
 
+    # after add/update review it will redirect to home page
     @staticmethod
     def get_absolute_url():
         return reverse('home')

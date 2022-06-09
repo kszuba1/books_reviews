@@ -3,10 +3,10 @@ from django.urls import path
 from .views import Home, ReviewDetail, AddReview, UpdateReview, DeleteReview, UserReviewsList
 
 urlpatterns = [
-    path('', Home.as_view(), name='home'),
-    path('review/<int:pk>', ReviewDetail.as_view(), name='review-detail'),
-    path('addReview/', AddReview.as_view(), name='add-review'),
-    path('updateReview/<int:pk>', UpdateReview.as_view(), name='update-review'),
-    path('deleteReview/<int:pk>', DeleteReview.as_view(), name='delete-review'),
-    path('myReviews/', UserReviewsList.as_view(), name='user-reviews')
+    path('', Home.as_view(), name='home'),  # home page
+    path('review/<int:pk>', ReviewDetail.as_view(), name='review-detail'),   # review details
+    path('addReview/', AddReview.as_view(), name='add-review'),   # add review
+    path('updateReview/<int:pk>', UpdateReview.as_view(), name='update-review'),   # update review
+    path('deleteReview/<int:pk>', DeleteReview.as_view(), name='delete-review'),   # delete review
+    path('myReviews/', UserReviewsList.as_view(), name='user-reviews')    # user's reviews
 ]

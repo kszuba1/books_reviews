@@ -22,6 +22,10 @@ class AddReview(generic.CreateView):
     template_name = 'review-form.html'
     # fields = '__all__'
 
+    def form_valid(self, form):         # set reviews.user as current user
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
 
 class ReviewDetail(generic.DetailView):
     model = Review
@@ -44,7 +48,7 @@ class DeleteReview(generic.DeleteView):
 class UserReviewsList(generic.ListView):
     model = Review
     template_name = 'user-reviews.html'
-    ordering = ['-id']
 
     def get_queryset(self):
-        return Review.objects.filter(user=self.request.user)
+        return Review.objects.filter(     # all user reviews, sorted by the latest
+            user=self.request.user).order_by('-id')

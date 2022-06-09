@@ -15,10 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from books_reviews.forms import UserLoginForm
+from django.contrib.auth import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('books_reviews.urls')),
     path('users/', include('django.contrib.auth.urls')),
     path('users/', include('users.urls')),
+    path(
+        'login/',
+        views.LoginView.as_view(
+            template_name="login.html",
+            authentication_form=UserLoginForm
+        ),
+        name='login'
+    )
 ]
