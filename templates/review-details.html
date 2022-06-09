@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Review Details</title>
+</head>
+<body>
+<h1>REVIEW details</h1>
+<h1>{{ review.title }}</h1>
+<small>By: {{ review.user.username }} - {{ review.review_date }}</small>
+<hr>
+<br/>
+{{ review.description }}
+
+<br><br>
+<a href="{% url 'home' %}">Back</a>
+</body>
+</html>
