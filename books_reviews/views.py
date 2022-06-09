@@ -43,6 +43,7 @@ class UpdateReview(generic.UpdateView):
 
 class DeleteReview(generic.DeleteView):
     model = Review
+    template_name = 'delete-review.html'
     success_url = reverse_lazy('home')
 
 
