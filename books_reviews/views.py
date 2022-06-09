@@ -1,22 +1,19 @@
-from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-
 from .forms import ReviewForm
 from .models import Review
-from django.http import HttpResponse, request
 from django.views import generic
 
 
 # all reviews
 
 
-class Home(generic.ListView):
+class ReviewListView(generic.ListView):
     model = Review
     template_name = 'home.html'
     ordering = ['-id']
 
 
-class AddReview(generic.CreateView):
+class AddReviewView(generic.CreateView):
     model = Review
     form_class = ReviewForm
     template_name = 'review-form.html'
@@ -28,12 +25,12 @@ class AddReview(generic.CreateView):
         return super().form_valid(form)
 
 
-class ReviewDetail(generic.DetailView):
+class ReviewDetailView(generic.DetailView):
     model = Review
     template_name = 'review-details.html'
 
 
-class UpdateReview(generic.UpdateView):
+class UpdateReviewView(generic.UpdateView):
     model = Review
     form_class = ReviewForm
     template_name = 'review-form.html'
@@ -41,13 +38,13 @@ class UpdateReview(generic.UpdateView):
     # fields = ['title', 'book_title', 'book_author', 'description', 'rate']
 
 
-class DeleteReview(generic.DeleteView):
+class DeleteReviewView(generic.DeleteView):
     model = Review
     template_name = 'delete-review.html'
     success_url = reverse_lazy('home')
 
 
-class UserReviews(generic.ListView):
+class UserReviewListView(generic.ListView):
     model = Review
     template_name = 'user-reviews.html'
 
@@ -56,7 +53,7 @@ class UserReviews(generic.ListView):
             user=self.request.user).order_by('-id')
 
 
-class SearchReview(generic.ListView):
+class SearchReviewView(generic.ListView):
     model = Review
     template_name = 'search-review.html'
     context_object_name = 'all_search_results'
@@ -66,7 +63,7 @@ class SearchReview(generic.ListView):
         query = self.request.GET.get('search')
 
         if query:
-            result = Review.objects.filter(book_title__contains=query)
+            result = Review.objects.filter(book_title__contains=query)    # search reviews by book's title
 
         else:
             result = None

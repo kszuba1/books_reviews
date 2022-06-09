@@ -1,8 +1,4 @@
-
 from django import forms
-from django.forms import ModelForm
-from django.http import request
-
 from .models import Review
 from django.contrib.auth.forms import AuthenticationForm, UsernameField
 
@@ -19,7 +15,6 @@ class ReviewForm(forms.ModelForm):
         )
 
         widgets = {
-
             'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter review title...'}),
             'book_title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter book title...'}),
             'book_author': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter book author...'}),
@@ -40,6 +35,3 @@ class UserLoginForm(AuthenticationForm):
         attrs={
             'class': 'form-control form-control-lg',
             'placeholder': 'Enter password'}))
-
-
-

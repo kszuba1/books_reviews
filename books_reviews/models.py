@@ -21,4 +21,3 @@ class Review(models.Model):
     @staticmethod
     def get_absolute_url():
         return reverse('home')
-

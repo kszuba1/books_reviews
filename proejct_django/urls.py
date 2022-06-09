@@ -23,12 +23,7 @@ urlpatterns = [
     path('', include('books_reviews.urls')),
     path('users/', include('django.contrib.auth.urls')),
     path('users/', include('users.urls')),
-    path(
-        'login/',
+    path('login/',
         views.LoginView.as_view(
-            template_name="registration/login-form.html",
-            authentication_form=UserLoginForm
-        ),
-        name='login'
-    )
+            template_name="registration/login-form.html", authentication_form=UserLoginForm), name='login')
 ]

@@ -1,13 +1,13 @@
 from django.urls import path
-# from . import views
-from .views import Home, ReviewDetail, AddReview, UpdateReview, DeleteReview, UserReviews, SearchReview
+from . import views
 
 urlpatterns = [
-    path('', Home.as_view(), name='home'),  # home page
-    path('review/<int:pk>', ReviewDetail.as_view(), name='review-detail'),  # review details
-    path('addReview/', AddReview.as_view(), name='add-review'),  # add review
-    path('updateReview/<int:pk>', UpdateReview.as_view(), name='update-review'),  # update review
-    path('deleteReview/<int:pk>', DeleteReview.as_view(), name='delete-review'),  # delete review
-    path('myReviews/', UserReviews.as_view(), name='user-reviews'),  # user's reviews
-    path('searchReview/', SearchReview.as_view(), name='search-review'),
+    path('', views.ReviewListView.as_view(), name='home'),  # home page
+    path('review/<int:pk>', views.ReviewDetailView.as_view(), name='review-detail'),  # review details
+    path('addReview/', views.AddReviewView.as_view(), name='add-review'),  # add review
+    path('updateReview/<int:pk>', views.UpdateReviewView.as_view(), name='update-review'),  # update review
+    path('deleteReview/<int:pk>', views.DeleteReviewView.as_view(), name='delete-review'),  # delete review
+    path('myReviews/', views.UserReviewListView.as_view(), name='user-reviews'),  # user's reviews
+    path('searchReview/', views.SearchReviewView.as_view(), name='search-review'),  # search review by book's title
+
 ]
