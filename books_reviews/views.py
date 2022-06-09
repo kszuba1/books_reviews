@@ -6,6 +6,7 @@ from .models import Review
 from django.http import HttpResponse, request
 from django.views import generic
 
+
 # all reviews
 
 
@@ -40,7 +41,10 @@ class DeleteReview(generic.DeleteView):
     success_url = reverse_lazy('home')
 
 
+class UserReviewsList(generic.ListView):
+    model = Review
+    template_name = 'user-reviews.html'
+    ordering = ['-id']
 
-
-
-
+    def get_queryset(self):
+        return Review.objects.filter(user=self.request.user)
