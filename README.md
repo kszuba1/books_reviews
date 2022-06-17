@@ -1,7 +1,18 @@
 # books_reviews
 
 Django CRUD application. Follow these steps to run app on localhost.
-<br>
+### Features
+* Review CRUD
+* Search reviews by book title
+* Search reviews by author
+* Login and registration
+### Technology stack
+* Python
+* Django
+* HTML + CSS
+* Bootstrap
+* SQLite
+### How to run
 1. Open terminal
 2. pip install virtualenv
 3. pip install django
