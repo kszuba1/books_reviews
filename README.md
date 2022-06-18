@@ -1,6 +1,7 @@
 # books_reviews
-
 Django CRUD application.
+<hr>
+
 ### Features
 * Review CRUD
 * Search reviews by book title
